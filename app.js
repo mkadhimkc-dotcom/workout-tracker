@@ -1,11 +1,9 @@
-// Supabase setup
-const { createClient } = supabase
+const { createClient } = window.supabase
 const client = createClient(
-  'https://xragzrjatiudhbrubejf.supabase.co',  // replace this
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhyYWd6cmphdGl1ZGhicnViZWpmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYzMDY4MTIsImV4cCI6MjA5MTg4MjgxMn0.JyX4aWIK6TTHPeyITWMYGLRRvgANVR2j20wSti5-WUM'      // replace this
+  'https://xragzrjatiudhbrubejf.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhyYWd6cmphdGl1ZGhicnViZWpmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYzMDY4MTIsImV4cCI6MjA5MTg4MjgxMn0.JyX4aWIK6TTHPeyITWMYGLRRvgANVR2j20wSti5-WUM'  // paste your real anon key here
 )
 
-// Save profile and show the app
 async function saveProfile() {
   const username = document.getElementById('username').value
   if (!username) return alert('Enter your name first!')
@@ -18,28 +16,35 @@ async function saveProfile() {
   loadHistory()
 }
 
-// Log a workout to Supabase
 async function logWorkout() {
   const type = document.getElementById('workout-type').value
   const username = localStorage.getItem('username')
 
-  await client.from('workout_logs').insert({
+  const { error } = await client.from('workout_logs').insert({
     username: username,
     workout_type: type
   })
 
-  loadHistory()
+  if (error) {
+    alert('Error: ' + error.message)
+  } else {
+    loadHistory()
+  }
 }
 
-// Fetch history from Supabase
 async function loadHistory() {
   const username = localStorage.getItem('username')
 
-  const { data } = await client
+  const { data, error } = await client
     .from('workout_logs')
     .select('*')
     .eq('username', username)
     .order('created_at', { ascending: false })
+
+  if (error) {
+    console.error('Load error:', error.message)
+    return
+  }
 
   const list = document.getElementById('workout-list')
   list.innerHTML = ''
