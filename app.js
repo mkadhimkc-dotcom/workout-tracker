@@ -2,7 +2,7 @@
 const { createClient } = supabase
 const client = createClient(
   'https://xragzrjatiudhbrubejf.supabase.co',  // replace this
-  'sb_publishable_w_MvZoTvXD2CnlGlL8vx0g_8Jdk8moo'      // replace this
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhyYWd6cmphdGl1ZGhicnViZWpmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYzMDY4MTIsImV4cCI6MjA5MTg4MjgxMn0.JyX4aWIK6TTHPeyITWMYGLRRvgANVR2j20wSti5-WUM'      // replace this
 )
 
 // Save profile and show the app
