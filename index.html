@@ -1,1 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Workout Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="container">
+    <h1>💪 Workout Tracker</h1>
+
+    <!-- Profile Section -->
+    <div class="card" id="profile-section">
+      <h2>Who are you?</h2>
+      <input type="text" id="username" placeholder="Enter your name" />
+      <button onclick="saveProfile()">Save</button>
+    </div>
+
+    <!-- Log a Workout -->
+    <div class="card" id="log-section" style="display:none">
+      <h2>Log a Workout</h2>
+      <select id="workout-type">
+        <option value="glutes">🍑 Glutes</option>
+        <option value="back">🎀 Back</option>
+        <option value="core">💪 Core</option>
+        <option value="cardio">💦 Cardio</option>
+      </select>
+      <button onclick="logWorkout()">Mark Complete ✅</button>
+    </div>
+
+    <!-- History -->
+    <div class="card" id="history-section" style="display:none">
+      <h2>Your History</h2>
+      <ul id="workout-list"></ul>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
 
